@@ -1,7 +1,7 @@
 'use strict';
 
 window.onload = function () {
-  var earthGlobe = new EarthGlobe();
+  var earthGlobe = new EarthGlobe("body");
   earthGlobe.loop();
 
   window.setDisasterRandom = function () {
@@ -14,16 +14,16 @@ window.onload = function () {
 }
 
 class EarthGlobe {
-  constructor() {
+  constructor(htmlSelector) {
     this.countries = [];  // Country data (coordinate, polygon)
 
     // Add stage to display world map
-    this.stage = d3.select("body")
+    this.stage = d3.select(htmlSelector)
       .append("svg:svg")
       .attr({
         "id": "earth",
         "width":  960,
-        "height": 600,
+        "height": 900,
       });
 
     this.projection_scale = 200;
