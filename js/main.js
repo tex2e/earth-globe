@@ -12,14 +12,17 @@ window.onload = function () {
       "height": 600,
     });
 
+  var projection_scale = 200;
+  var projection_rotate = [220, 0, 0];
+
   // Configure projection
   var projection = d3.geo.orthographic()
-    .scale(150)
-    .rotate([0, 0, 0])
+    .scale(projection_scale)
+    .rotate(projection_rotate)
     .clipAngle(90); // Display angle
   var projection_back = d3.geo.orthographic()
-    .scale(150)
-    .rotate([0, 0, 0])
+    .scale(projection_scale)
+    .rotate(projection_rotate)
     .clipAngle(180); // Display angle
 
   // Create path generator
@@ -91,11 +94,10 @@ window.onload = function () {
   }
 
   // Rotate projection
-  var x_axis = 0;
   var update_rotation = function () {
-    x_axis += 0.5;
-    projection_back.rotate([x_axis, 0, 0]);
-    projection.rotate([x_axis, 0, 0]);
+    projection_rotate[0] += 0.1; // x_axis
+    projection_back.rotate(projection_rotate);
+    projection.rotate(projection_rotate);
     // update path function
     path_back = d3.geo.path().projection(projection_back);
     path      = d3.geo.path().projection(projection);
@@ -107,7 +109,7 @@ window.onload = function () {
   setInterval(() => {
     update_country_color();
     update_rotation();
-  }, 100);
+  }, 500);
 }
 
 function setDisasterRandom() {
