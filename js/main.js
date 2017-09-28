@@ -1,10 +1,16 @@
 'use strict';
 
-var earthGlobe;
-
 window.onload = function () {
-  earthGlobe = new EarthGlobe();
+  var earthGlobe = new EarthGlobe();
   earthGlobe.loop();
+
+  window.setDisasterRandom = function () {
+    earthGlobe.setDisasterRandom();
+  }
+
+  window.setDisasterZero = function () {
+    earthGlobe.setDisasterZero();
+  }
 }
 
 class EarthGlobe {
@@ -124,12 +130,4 @@ class EarthGlobe {
       this.countries[i].disaster = 0;
     }
   }
-}
-
-function setDisasterRandom() {
-  earthGlobe.setDisasterRandom();
-}
-
-function setDisasterZero() {
-  earthGlobe.setDisasterZero();
 }
